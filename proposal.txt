@@ -1,6 +1,6 @@
-#Title: RootFS Build Factory for CentOS
+# Title: RootFS Build Factory for CentOS
 
-#Problem Statement: 
+# Problem Statement: 
 Once CentOS for ARM is released, many board vendors would want to release 
 images for their boards. Every vendor will have their kernel,firmware and 
 bootloader that they would want to integrate into images making it easy for 
