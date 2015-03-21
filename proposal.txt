@@ -30,62 +30,62 @@ Tools I use: GEdit when X11 is available. nano otherwise
 
 Concept: 
 + Use x86/x86_64 to build ARM RootFS. This approach has  worked in the past. 
-	msalter from redhat did this in 2009. 
-	https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html 
-	My attempt to contact him has not been successful. 
+  msalter from redhat did this in 2009. 
+  https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html 
+  My attempt to contact him has not been successful. 
 + It should be possible to generate rootfs on non-ARM system. My reasons for 
-	saying so are
-		- System builders may not always have access to good performance ARM boards. 
-		- Also, vendors should not need a supported board fo building a rootfs for 
-			their board. QEMU is just too slow for any development work.
-		- Moreover, Intel i7s or equivalent (x86, x86_64) are going to be faster 
-			for general purpose computing than most ARM boards out there.
+  saying so are
+    - System builders may not always have access to good performance ARM boards. 
+    - Also, vendors should not need a supported board fo building a rootfs for 
+      their board. QEMU is just too slow for any development work.
+    - Moreover, Intel i7s or equivalent (x86, x86_64) are going to be faster 
+      for general purpose computing than most ARM boards out there.
 
 Note: I would like to contribute to the CentOS ARM Project but since I have my 
-			semester exams, I can't focus on this 100%. Hopefully a CentOS ARMv7 
-			release will become available by the time GSoC coding period beings. If 
-			not, my concept is to use the cross compile approach using Mock and Koji.
-			This will require writing some plugins. Again, this is something which 
-			has been already done. 
-			https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html
-			So it shouldn't be too hard.
+      semester exams, I can't focus on this 100%. Hopefully a CentOS ARMv7 
+      release will become available by the time GSoC coding period beings. If 
+      not, my concept is to use the cross compile approach using Mock and Koji.
+      This will require writing some plugins. Again, this is something which 
+      has been already done. 
+      https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html
+      So it shouldn't be too hard.
 
 
 Available Resources:
 + 3 x86/x86_64 machines
-	- Intel i7 4770, 16GB RAM
-	- Intel Core 2 Duo, 4GB RAM
-	- Intel Atom 512 MB RAM (for testing)
+  - Intel i7 4770, 16GB RAM
+  - Intel Core 2 Duo, 4GB RAM
+  - Intel Atom 512 MB RAM (for testing)
 + Internet Connectivity from 2 ISPs to make sure I'm always online.
 + 1 Openmoko Freerunner ARMv4TL 400MHz Processor (incase we are able to get a 
-	armv4tl compiler to build CentOS)
+  armv4tl compiler to build CentOS)
 + Will purchase Cubie Board and/or Raspberry Pi or other preferred boards (will
-	decide after discussion with my mentor) if my proposal is accepted.
+  decide after discussion with my mentor) if my proposal is accepted.
 
 Main Features of RootFS Build Factory
 + Generates Rootfs based on profile. Profiles are templates created by board 
-	vendors specifying configuration for bootloader, packages to be installed, 
-	kernel version.
+  vendors specifying configuration for bootloader, packages to be installed, 
+  kernel version.
 + Uses Yum to download all packages and dependencies into a new root.
 + Has configuration options specifying path to firmware, ramfs and kernel.
 + User specifies packages to install in config file. The Build Factory resolves
-	dependencies automatically.
+  dependencies automatically.
 + Has an option whether to use Vanilla Kernel (some board vendors might have a 
-	custom kernel)/Use Stock Kernel/SPEC file.
+  custom kernel)/Use Stock Kernel/SPEC file.
 + Specify path to Cross Compiler in case you don't want to use the stock kernel
-	and want the Build Factory to compile the kernel for you.
+  and want the Build Factory to compile the kernel for you.
 + Yum plugin allowing you to create ARM rootfs on x86/x86_64. Downloads rpms 
-	from ARM repo instead of x86/x86_64 repo.
+  from ARM repo instead of x86/x86_64 repo.
 + Option to use stock RPMs or rebuild from SRPMs.
 + Write image to SD Card.
 + Path to U-Boot/Vivi/Other Bootloader binary.
 + Config file specifies image format (jffs2,squashfs,cramfs,raw etc.)
 + Option to specify overlay etc path containing /etc/<config> files for system 
-	and packages
+  and packages
 + Cross Yum script to install non-arch packages
 + Yum plugin to make sure kernel updates don't make system unbootable. The 
-	plugin uses a script to perform the final special steps for each rootfs. 
-	Which script to use will depend on the board profile.
+  plugin uses a script to perform the final special steps for each rootfs. 
+  Which script to use will depend on the board profile.
 
 Sample Board Profile (XML): This is what a board profile would roughly resemble.
 
@@ -124,54 +124,54 @@ Sample Board Profile (XML): This is what a board profile would roughly resemble.
 
 Time Dedicated to GSoC:  
 + 56 hours a week (more if possible) till July 15. My next semester at college 
-	starts around July 15.
- 	Might need couple of days off in between to handle some paper work at college
+  starts around July 15.
+  Might need couple of days off in between to handle some paper work at college
 + 28 hours a week after that. Working hours will depend on my lecture schedule.
-	But I will be able to dedicate at least 4 hours a day to GSoC.
+  But I will be able to dedicate at least 4 hours a day to GSoC.
 
 Assumptions:
 + CentOS for ARMv7 will be ready by the time testing for Rootfs Build Factory 
-	begins.
+  begins.
 + If it is not ready, the RootFS Build Factory can be tested by generating x86,
-	x86_64 images.
+  x86_64 images.
 
 Timeline:
 + In the community bonding period and till June 7 (that is when my semester 
-	exams tentatively end)
-	- Get familiar with details of yum, mock and koji. Learn how to write simple 
-		plugins. 
-	- Acquire couple of ARM development boards
+  exams tentatively end)
+  - Get familiar with details of yum, mock and koji. Learn how to write simple 
+    plugins. 
+  - Acquire couple of ARM development boards
 
 Target 1: CentOS for ARM (1 week if CentOS for ARM is available, 4 weeks 
-					otherwise)
+          otherwise)
 + If CentOS for ARMv7 is not available by the time we need it, 
-	- Work on doing a bootstrap using the method followed by Fedora 
-		https://fedoraproject.org/wiki/Architectures/AArch64/Bootstrap.
-	- Alternatively use the cross compile approach to first compile 
-		@buildsys-build.
-	- Write Mock, Koji plugins to handle cross compiles. Base it on msalter's 
-		work 
-		https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html
+  - Work on doing a bootstrap using the method followed by Fedora 
+    https://fedoraproject.org/wiki/Architectures/AArch64/Bootstrap.
+  - Alternatively use the cross compile approach to first compile 
+    @buildsys-build.
+  - Write Mock, Koji plugins to handle cross compiles. Base it on msalter's 
+    work 
+    https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html
 + Setup Local CentOS Repository for faster downloading of pacakges.
 
 Target 2: Yum Plugin (2 Weeks)
 + Write Yum plugin to download packages for non host architectures 
-	eg. downloading ARMv7 packages on a x86_64 host.
+  eg. downloading ARMv7 packages on a x86_64 host.
 
 Target 3: Scripting (2 weeks)
 + Finalize board profile XML format and write a parser for it.
 + Write Python/Yum/Bash scripts to install packages to custom root partition.
 + Come up with releiable ways to copy an overlay etc directory to new rootfs.
-	(or we could just force copy it overwriting the default config files)
+  (or we could just force copy it overwriting the default config files)
 
 Target 4: Scripts for making images bootable (2 weeks)
 + Yum plugin to make sure kernel updates don't make system unbootable.
 + Generate Image for QEMU,Cubie Board, Raspberry Pi, other available boards.
-	Test them.
+  Test them.
 
 Target 5: GUI (1 week) 
 + Build GUI using PyGTK. There may not be any time left for this if we have to 
-	do the ARM port of CentOS in the GSoC coding period.
+  do the ARM port of CentOS in the GSoC coding period.
 
 Target 6: Testing (1 week)
 + Write Unit Tests.
