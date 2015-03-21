@@ -56,7 +56,7 @@ Main Features of RootFS Build Factory
 + Yum plugin to make sure kernel updates don't make system unbootable. The plugin uses a script to perform the final special steps for each rootfs. Which script to use will depend on the board profile.
 
 Sample Board Profile (XML): This is what a board profile would roughly resemble.
-
+<pre>
 <image>
 	<type>jffs2</type>
 	<outputdirectory>/home/vendor/image/</outputdirectory>
@@ -80,7 +80,7 @@ Sample Board Profile (XML): This is what a board profile would roughly resemble.
 <config>
 	<rootpass>secret</rootpass>
 	<hostname>centosarmv7</hostname>
-	<network>		
+	<network>
 		<ipaddress>192.168.1.200/24</ipaddress>
 		<subnetmask>255.255.255.0</subnetmask>
 		<gateway>192.168.1.1</gateway>
@@ -88,9 +88,9 @@ Sample Board Profile (XML): This is what a board profile would roughly resemble.
 	<overlayetcpath>/opt/vendor/src/etc/</overlayetcpath>
 	<finalizescript>/opt/vendor/src/scipts/finalize.sh</finalizescript>
 </config>
+</pre>
 
-
-Time Dedicated to GSoC:  
+Time Dedicated to GSoC:
 + 56 hours a week (more if possible) till July 15. My next semester at college starts around July 15.
  Might need couple of days off in between to handle some paper work at college.
 + 28 hours a week after that. Working hours will depend on my lecture schedule. But I will be able to dedicate at least 4 hours a day to GSoC.
