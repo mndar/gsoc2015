@@ -1,6 +1,6 @@
-# Title: RootFS Build Factory for CentOS
+#Title: RootFS Build Factory for CentOS
 
-# Problem Statement: 
+#Problem Statement: 
 Once CentOS for ARM is released, many board vendors would want to release 
 images for their boards. Every vendor will have their kernel,firmware and 
 bootloader that they would want to integrate into images making it easy for 
@@ -12,14 +12,7 @@ Email Address: emailmandar at gmail.com
 Phone: <Phone Number Here>
 Freenode IRC Nick: mndar
 Location (City, Country and/or Time Zone): Mumbai, India (UTC/GMT +5:30 hours)
-Preferred Working Hours: Flexible. If I have to work during they day, I can do 
-it from 9:00 to 17:00 IST (GMT 3:30 to 11:30). I am open to adjusting my work 
-hours depending on my mentor's preferences. But these times will have to be 
-adjusted once my next semester begins around July 15 depending on my lecture 
-hours.
-Availability on IRC or via Phone: I'll try and be reachable most of the time.
 
-Project Details:
 Motivation: My first choice for a server is CentOS as it is the top stable 
 Linux server distribution and is very well accepted in any production 
 environment. I would like to see CentOS building the same reputation in 
