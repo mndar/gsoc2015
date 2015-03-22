@@ -24,8 +24,9 @@ Tools I use: GEdit when X11 is available. nano otherwise
 Concept: 
 + Use x86/x86_64 to build ARM RootFS. This approach has  worked in the past. 
   msalter from redhat did this in 2009. 
-  https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html 
-  My attempt to contact him has not been successful. 
+  https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html
++ With a Yum plugin alter Yum's behavior while installing kernel updates for 
+  ARM systems to make sure the system stays bootable after a kernel upgrade.
 + It should be possible to generate rootfs on non-ARM system. My reasons for 
   saying so are
     - System builders may not always have access to good performance ARM boards. 
@@ -33,16 +34,6 @@ Concept:
       their board. QEMU is just too slow for any development work.
     - Moreover, Intel i7s or equivalent (x86, x86_64) are going to be faster 
       for general purpose computing than most ARM boards out there.
-
-Note: I would like to contribute to the CentOS ARM Project but since I have my 
-      semester exams, I can't focus on this 100%. Hopefully a CentOS ARMv7 
-      release will become available by the time GSoC coding period beings. If 
-      not, my concept is to use the cross compile approach using Mock and Koji.
-      This will require writing some plugins. Again, this is something which 
-      has been already done. 
-      https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html
-      So it shouldn't be too hard.
-
 
 Available Resources:
 + 3 x86/x86_64 machines
@@ -59,7 +50,9 @@ Main Features of RootFS Build Factory
 + Generates Rootfs based on profile. Profiles are templates created by board 
   vendors specifying configuration for bootloader, packages to be installed, 
   kernel version.
-+ Uses Yum to download all packages and dependencies into a new root.
++ Yum plugin allowing you to create ARM rootfs on x86/x86_64. Downloads and 
+  installs rpms from ARM repo instead of x86/x86_64 repo. Installs rpms to
+  new root specified in the configuration file.
 + Has configuration options specifying path to firmware, ramfs and kernel.
 + User specifies packages to install in config file. The Build Factory resolves
   dependencies automatically.
@@ -67,15 +60,12 @@ Main Features of RootFS Build Factory
   custom kernel)/Use Stock Kernel/SPEC file.
 + Specify path to Cross Compiler in case you don't want to use the stock kernel
   and want the Build Factory to compile the kernel for you.
-+ Yum plugin allowing you to create ARM rootfs on x86/x86_64. Downloads rpms 
-  from ARM repo instead of x86/x86_64 repo.
 + Option to use stock RPMs or rebuild from SRPMs.
 + Write image to SD Card.
 + Path to U-Boot/Vivi/Other Bootloader binary.
 + Config file specifies image format (jffs2,squashfs,cramfs,raw etc.)
 + Option to specify overlay etc path containing /etc/<config> files for system 
   and packages
-+ Cross Yum script to install non-arch packages
 + Yum plugin to make sure kernel updates don't make system unbootable. The 
   plugin uses a script to perform the final special steps for each rootfs. 
   Which script to use will depend on the board profile.
@@ -127,6 +117,7 @@ Assumptions:
   begins.
 + If it is not ready, the RootFS Build Factory can be tested by generating x86,
   x86_64 images.
++ Alternatively build a bare minimum CentOS ARM system during the GSoC project.
 
 Timeline:
 + In the community bonding period and till June 7 (that is when my semester 
@@ -194,7 +185,7 @@ the Linux kernel (ALSA Project) to add support for a volume knob and LED for a
 USB sound card.
 Details of the projects I've worked on are here
 http://mndar.phpnet.us/resume or http://mndar.github.io/resume/
-In my free time I like to drive, listen to music and enjoy configuring/fixing 
+In my free time I like to drive, listen to music and enjoy configuring/fixing
 computers.
 
 Opensource Contributions:
