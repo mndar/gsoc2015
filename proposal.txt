@@ -126,7 +126,7 @@ Timeline:
     plugins. 
   - Acquire couple of ARM development boards
 
-Target 1: CentOS for ARM (1 week if CentOS for ARM is available, 4 weeks 
+Target 1: CentOS for ARM (1 week if CentOS for ARM is available, 3-4 weeks 
           otherwise)
 + If CentOS for ARMv7 is not available by the time we need it, 
   - Work on doing a bootstrap using the method followed by Fedora 
@@ -203,10 +203,10 @@ the Linux domain and this will help me in the GSoC project by reducing the time
 I need to adjust to a work like environment. I have worked on projects locally
 as well as remotely. When I was part of a team to do feasibility study for a 
 VoIP system, I worked remotely with the project leader. I was in Mumbai,India 
-and the project leader was in Tokyo,Japan.
+and the project leader was in Tokyo,Japan. That is why I feel I can code an 
+excellent project if given this opportunity.
 
 Please feel free to contact me anytime via email or phone if you need any 
 clarifications on the approach I am proposing.
 I look forward to hearing from you.
-
 
