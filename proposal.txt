@@ -195,7 +195,7 @@ volume knob and LED for a USB sound card.
 [2] http://mailman.alsa-project.org/pipermail/alsa-devel/2010-November/033300.html
 
 Why I am the right person for the job:
-I have been an enthusiastic Linux user for the past 9 1/2 years. Starting out 
+I have been an enthusiastic Linux user for the past 10 years. Starting out 
 with simpler distributions and configurations and advancing to embedded systems
 and more difficult ones over the years. I am a hands on person and very 
 passinate about the task I take up. I have gained valuable work experience in 
