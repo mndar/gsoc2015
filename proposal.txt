@@ -60,9 +60,8 @@ Main Features of RootFS Build Factory
   custom kernel)/Use Stock Kernel/SPEC file.
 + Specify path to Cross Compiler in case you don't want to use the stock kernel
   and want the Build Factory to compile the kernel for you.
-+ Option to use stock RPMs or rebuild from SRPMs.
 + Write image to SD Card.
-+ Path to U-Boot/Vivi/Other Bootloader binary.
++ Config file specifies path to U-Boot/Vivi/Other Bootloader binary.
 + Config file specifies image format (jffs2,squashfs,cramfs,raw etc.)
 + Option to specify overlay etc path containing /etc/<config> files for system 
   and packages
@@ -147,6 +146,11 @@ Target 3: Scripting (2 weeks)
 + Write Python/Yum/Bash scripts to install packages to custom root partition.
 + Come up with releiable ways to copy an overlay etc directory to new rootfs.
   (or we could just force copy it overwriting the default config files)
+
+For the Mid Term evaluation, the Yum plugin for download packages for non host
+architectures and parser for board profile XML files along witwh some scripts 
+to install pacakges to custom root partition should be ready. This is assuming
+we don't have to build CentOS for ARM in the coding period.
 
 Target 4: Scripts for making images bootable (2 weeks)
 + Yum plugin to make sure kernel updates don't make system unbootable.
