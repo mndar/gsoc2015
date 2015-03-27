@@ -1,11 +1,7 @@
 Title: RootFS Build Factory for CentOS
 
 Problem Statement: 
-Once CentOS for ARM is released, many board vendors would want to release 
-images for their boards. Every vendor will have their kernel,firmware and 
-bootloader that they would want to integrate into images making it easy for 
-users to install and upgrade. I would like to work on a set of tools and 
-scripts that takes basic board information as input and generates a rootfs.
+Once CentOS for ARM is released, many board vendors will want to release custom images. Every vendor will have their kernel,firmware and bootloader that they would want to integrate into images. I would like to work on a set of tools & scripts that makes generation of such images easy. Tools presently available like ImageFactory focus on VM & cloud images and not on embedded systems. For handling the nitty-gritty of ARM systems I believe we should write a set yum plugins and tools (if required)
 
 Name: Mandar Joshi
 Email Address: emailmandar at gmail.com
@@ -34,17 +30,6 @@ Concept:
       their board. QEMU is just too slow for any development work.
     - Moreover, Intel i7s or equivalent (x86, x86_64) are going to be faster 
       for general purpose computing than most ARM boards out there.
-
-Available Resources:
-+ 3 x86/x86_64 machines
-  - Intel i7 4770, 16GB RAM
-  - Intel Core 2 Duo, 4GB RAM
-  - Intel Atom 512 MB RAM (for testing)
-+ Internet Connectivity from 2 ISPs to make sure I'm always online.
-+ 1 Openmoko Freerunner ARMv4TL 400MHz Processor (incase we are able to get a 
-  armv4tl compiler to build CentOS)
-+ Will purchase Cubie Board and/or Raspberry Pi or other preferred boards (will
-  decide after discussion with my mentor) if my proposal is accepted.
 
 Main Features of RootFS Build Factory
 + Generates Rootfs based on profile. Profiles are templates created by board 
@@ -103,25 +88,15 @@ Sample Board Profile (XML): This is what a board profile would roughly resemble.
 	<finalizescript>/opt/vendor/src/scipts/finalize.sh</finalizescript>
 </config>
 
-
-Time Dedicated to GSoC:  
-+ 56 hours a week (more if possible) till July 15. My next semester at college 
-  starts around July 15.
-  Might need couple of days off in between to handle some paper work at college
-+ 28 hours a week after that. Working hours will depend on my lecture schedule.
-  But I will be able to dedicate at least 4 hours a day to GSoC.
-
 Assumptions:
 + CentOS for ARMv7 will be ready by the time testing for Rootfs Build Factory 
   begins.
-+ If it is not ready, the RootFS Build Factory can be tested by generating x86,
-  x86_64 images.
 + Alternatively build a bare minimum CentOS ARM system during the GSoC project.
 
 Timeline:
 + In the community bonding period and till June 7 (that is when my semester 
   exams tentatively end)
-  - Get familiar with details of yum, mock and koji. Learn how to write simple 
+  - Get familiar with details of Yum, Mock and Koji. Learn how to write simple 
     plugins. 
   - Acquire couple of ARM development boards
 
@@ -141,33 +116,65 @@ Target 2: Yum Plugin (2 Weeks)
 + Write Yum plugin to download packages for non host architectures 
   eg. downloading ARMv7 packages on a x86_64 host.
 
-Target 3: Scripting (2 weeks)
+Target 3: Scripting (1 week)
 + Finalize board profile XML format and write a parser for it.
++ Script calculates and displays summary of operations that will be performed
+  with the provided profile.
+  
+For the Mid Term evaluation deadline of 3 July (tentatively before 30th June),
+the Yum plugin for download packages for non host architectures and parser for
+board profile XML files should be ready. This is assuming we don't have to
+build CentOS for ARM in the coding period otherwise only a bare minimum CentOS
+port for ARM will be ready.
+
+Target 4: Scripts to install packages & config files to new root (1 week)
 + Write Python/Yum/Bash scripts to install packages to custom root partition.
-+ Come up with releiable ways to copy an overlay etc directory to new rootfs.
++ Come up with reliable ways to copy an overlay etc directory to new rootfs.
   (or we could just force copy it overwriting the default config files)
 
-For the Mid Term evaluation, the Yum plugin for download packages for non host
-architectures and parser for board profile XML files along witwh some scripts 
-to install pacakges to custom root partition should be ready. This is assuming
-we don't have to build CentOS for ARM in the coding period.
-
-Target 4: Scripts for making images bootable (2 weeks)
-+ Yum plugin to make sure kernel updates don't make system unbootable.
+Target 5: Convert rootfs to bootable image (1 week)
++ Write scripts to make rootfs bootable for each of the available boards. The
+  information for these scripts(kernel modules,firmware, bootloader) will be 
+  read from the board profile.
 + Generate Image for QEMU,Cubie Board, Raspberry Pi, other available boards.
   Test them.
 
-Target 5: GUI (1 week) 
-+ Build GUI using PyGTK. There may not be any time left for this if we have to 
-  do the ARM port of CentOS in the GSoC coding period.
+Target 6: Yum Plugin to handle kernel updates (2 Weeks)
++ Yum plugin to make sure kernel updates don't make system unbootable.
 
-Target 6: Testing (1 week)
-+ Write Unit Tests.
+There will be no more/very little time left for the below targets if CentOS for
+ARM is built during the coding period.
 
-Target 7: Remaining Time
+Target 7: Misc Features & GUI (2 weeks)
++ Kernel compilation using crosscompiler & config specified in board profile.
++ Add feature to write rootfs image to sd card. Any custom actions (eg.
+  partitions) will be read from the board profile. Modify parser for this.
++ Build GUI using PyGTK.
+
+By 17 August, the above targets will be completed.
+
+Target 8: Testing (1 week)
++ Write Tests.
 + Documentation
 + Write Wiki Page for supported boards.
 + Write Tutorial for using the RootFS Build Factory.
+
+Time Dedicated to GSoC:  
++ 50 hours a week (more if possible) till July 15. My next semester at college 
+  starts around July 15.
+  Might need couple of days off in between to handle some paper work at college
++ 25 hours a week after that. Working hours will depend on my lecture schedule.
+
+Available Resources:
++ 3 x86/x86_64 machines
+  - Intel i7 4770, 16GB RAM
+  - Intel Core 2 Duo, 4GB RAM
+  - Intel Atom 512 MB RAM (for testing)
++ Internet Connectivity from 2 ISPs to make sure I'm always online.
++ 1 Openmoko Freerunner ARMv4TL 400MHz Processor (incase we are able to get a 
+  armv4tl compiler to build CentOS)
++ Will purchase Cubie Board and/or Raspberry Pi or other preferred boards (will
+  decide after discussion with my mentor) if my proposal is accepted.
 
 About Me:
 My primary area of interest is Linux and my programming languages of choice are
