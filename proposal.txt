@@ -1,7 +1,13 @@
 Title: RootFS Build Factory for CentOS
 
 Problem Statement: 
-Once CentOS for ARM is released, many board vendors will want to release custom images. Every vendor will have their kernel,firmware and bootloader that they would want to integrate into images. I would like to work on a set of tools & scripts that makes generation of such images easy. Tools presently available like ImageFactory focus on VM & cloud images and not on embedded systems. For handling the nitty-gritty of ARM systems I believe we should write a set yum plugins and tools (if required)
+Once CentOS for ARM is released, many board vendors will want to release custom
+images. Every vendor will have their kernel,firmware and bootloader that they
+would want to integrate into images. I would like to work on a set of tools &
+scripts that makes generation of such images easy. Tools presently available
+like ImageFactory focus on VM & cloud images and not on embedded systems. For
+handling the nitty-gritty of ARM systems I believe we should write a set yum
+plugins and tools (if required)
 
 Name: Mandar Joshi
 Email Address: emailmandar at gmail.com
