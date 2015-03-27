@@ -1,13 +1,12 @@
 Title: RootFS Build Factory for CentOS
 
 Problem Statement: 
-Once CentOS for ARM is released, many board vendors will want to release custom
-images. Every vendor will have their kernel,firmware and bootloader that they
-would want to integrate into images. I would like to work on a set of tools &
-scripts that makes generation of such images easy. Tools presently available
-like ImageFactory focus on VM & cloud images and not on embedded systems. For
-handling the nitty-gritty of ARM systems I believe we should write a set yum
-plugins and tools (if required)
+Once CentOS for ARM is released, board vendors will want to release custom images.
+Every vendor will have their kernel,firmware & bootloader that they would want to
+integrate into images. I would like to work on a set of tools & scripts that makes
+generation of such images easy. Available tools like ImageFactory presently focus
+mainly on VM & cloud images. For handling the nitty-gritty of ARM systems I propose
+development of a set of yum plugins & tools, either separately or with ImageFactory.
 
 Name: Mandar Joshi
 Email Address: emailmandar at gmail.com
@@ -29,6 +28,8 @@ Concept:
   https://www.redhat.com/archives/fedora-buildsys-list/2009-July/msg00000.html
 + With a Yum plugin alter Yum's behavior while installing kernel updates for 
   ARM systems to make sure the system stays bootable after a kernel upgrade.
++ Having a simple GUI would reduce the effort required by vendors. This will
+  make it easier for vendors to supply CentOS images with their boards.
 + It should be possible to generate rootfs on non-ARM system. My reasons for 
   saying so are
     - System builders may not always have access to good performance ARM boards. 
@@ -37,30 +38,30 @@ Concept:
     - Moreover, Intel i7s or equivalent (x86, x86_64) are going to be faster 
       for general purpose computing than most ARM boards out there.
 
-Main Features of RootFS Build Factory
-+ Generates Rootfs based on profile. Profiles are templates created by board 
+Main Features:
++ Generates Rootfs based on template. Templates are created by board
   vendors specifying configuration for bootloader, packages to be installed, 
   kernel version.
 + Yum plugin allowing you to create ARM rootfs on x86/x86_64. Downloads and 
   installs rpms from ARM repo instead of x86/x86_64 repo. Installs rpms to
-  new root specified in the configuration file.
+  new root specified in the template file.
 + Has configuration options specifying path to firmware, ramfs and kernel.
-+ User specifies packages to install in config file. The Build Factory resolves
++ User specifies packages to install in template file. The Build Factory resolves
   dependencies automatically.
 + Has an option whether to use Vanilla Kernel (some board vendors might have a 
   custom kernel)/Use Stock Kernel/SPEC file.
 + Specify path to Cross Compiler in case you don't want to use the stock kernel
   and want the Build Factory to compile the kernel for you.
 + Write image to SD Card.
-+ Config file specifies path to U-Boot/Vivi/Other Bootloader binary.
-+ Config file specifies image format (jffs2,squashfs,cramfs,raw etc.)
++ Template file specifies path to U-Boot/Vivi/Other Bootloader binary.
++ Template file specifies image format (jffs2,squashfs,cramfs,raw etc.)
 + Option to specify overlay etc path containing /etc/<config> files for system 
   and packages
 + Yum plugin to make sure kernel updates don't make system unbootable. The 
   plugin uses a script to perform the final special steps for each rootfs. 
-  Which script to use will depend on the board profile.
+  Which script to use will depend on the board template.
 
-Sample Board Profile (XML): This is what a board profile would roughly resemble.
+Sample Board Template (XML): This is what a board template would roughly resemble.
 
 <image>
 	<type>jffs2</type>
@@ -91,7 +92,7 @@ Sample Board Profile (XML): This is what a board profile would roughly resemble.
 		<gateway>192.168.1.1</gateway>
 	</network>
 	<overlayetcpath>/opt/vendor/src/etc/</overlayetcpath>
-	<finalizescript>/opt/vendor/src/scipts/finalize.sh</finalizescript>
+	<finalizescript>/opt/vendor/src/scripts/finalize.sh</finalizescript>
 </config>
 
 Assumptions:
@@ -102,8 +103,8 @@ Assumptions:
 Timeline:
 + In the community bonding period and till June 7 (that is when my semester 
   exams tentatively end)
-  - Get familiar with details of Yum, Mock and Koji. Learn how to write simple 
-    plugins. 
+  - Get familiar with details of Yum, Mock, Koji & ImageFactory. Learn how to
+    write simple plugins.
   - Acquire couple of ARM development boards
 
 Target 1: CentOS for ARM (1 week if CentOS for ARM is available, 3-4 weeks 
@@ -123,13 +124,13 @@ Target 2: Yum Plugin (2 Weeks)
   eg. downloading ARMv7 packages on a x86_64 host.
 
 Target 3: Scripting (1 week)
-+ Finalize board profile XML format and write a parser for it.
++ Finalize board template XML format and write a parser for it.
 + Script calculates and displays summary of operations that will be performed
-  with the provided profile.
+  with the provided template.
   
 For the Mid Term evaluation deadline of 3 July (tentatively before 30th June),
 the Yum plugin for download packages for non host architectures and parser for
-board profile XML files should be ready. This is assuming we don't have to
+board template XML files should be ready. This is assuming we don't have to
 build CentOS for ARM in the coding period otherwise only a bare minimum CentOS
 port for ARM will be ready.
 
@@ -141,7 +142,7 @@ Target 4: Scripts to install packages & config files to new root (1 week)
 Target 5: Convert rootfs to bootable image (1 week)
 + Write scripts to make rootfs bootable for each of the available boards. The
   information for these scripts(kernel modules,firmware, bootloader) will be 
-  read from the board profile.
+  read from the board template.
 + Generate Image for QEMU,Cubie Board, Raspberry Pi, other available boards.
   Test them.
 
@@ -152,9 +153,9 @@ There will be no more/very little time left for the below targets if CentOS for
 ARM is built during the coding period.
 
 Target 7: Misc Features & GUI (2 weeks)
-+ Kernel compilation using crosscompiler & config specified in board profile.
++ Kernel compilation using crosscompiler & config specified in board template.
 + Add feature to write rootfs image to sd card. Any custom actions (eg.
-  partitions) will be read from the board profile. Modify parser for this.
+  partitions) will be read from the board template. Modify parser for this.
 + Build GUI using PyGTK.
 
 By 17 August, the above targets will be completed.
